@@ -56,6 +56,22 @@ OLLAMA_MODEL=qwen3.5:3b
 OLLAMA_BASE_URL=http://localhost:11434
 ```
 
+Optional Mimo OpenAI-compatible endpoint:
+
+```bash
+MIMO_API_KEY=...
+MIMO_BASE_URL=https://token-plan-sgp.xiaomimimo.com/v1
+MIMO_MODEL=mimo-v2.5-pro
+```
+
+Optional generic OpenAI-compatible endpoint:
+
+```bash
+LLM_ENDPOINT=https://example.com/v1
+API_KEY=...
+MODEL=example-model
+```
+
 ## Commands
 
 Run the weak baseline:
@@ -69,6 +85,8 @@ Run your implementation:
 ```bash
 python grade/scoring.py --module src.agent.graph --provider google
 ```
+
+Use `--provider mimo` for Mimo or `--provider compatible` for a generic OpenAI-compatible endpoint.
 
 Run tests:
 

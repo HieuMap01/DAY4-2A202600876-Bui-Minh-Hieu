@@ -48,7 +48,25 @@ def build_chat_model(
             base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             temperature=temperature,
         )
-    raise ValueError("This lab supports only the `google` and `ollama` providers.")
+    if provider == "mimo":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("MIMO_MODEL", "mimo-v2.5-pro"),
+            api_key=os.getenv("MIMO_API_KEY"),
+            base_url=os.getenv("MIMO_BASE_URL", "https://token-plan-sgp.xiaomimimo.com/v1"),
+            temperature=temperature,
+        )
+    if provider == "compatible":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("MODEL", ""),
+            api_key=os.getenv("API_KEY"),
+            base_url=os.getenv("LLM_ENDPOINT"),
+            temperature=temperature,
+        )
+    raise ValueError("This lab supports only the `google`, `ollama`, `mimo`, and `compatible` providers.")
 
 
 def extract_json_object(raw: Any) -> dict[str, Any]:
